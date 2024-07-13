@@ -5,4 +5,5 @@
     <color name="text_colour">#3C3C3C</color>
     <color name="background_colour">#FF394359</color>
     <color name="floating_button">#FFFFC107</color>
+    <color name="label_text_colour">#808080</color>
 </resources>

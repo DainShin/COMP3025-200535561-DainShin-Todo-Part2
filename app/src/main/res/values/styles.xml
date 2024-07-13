@@ -6,4 +6,7 @@
     <style name="CustomFABShape" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerSize">16dp</item>
     </style>
+    <style name="DetailsButton">
+        <item name="cornerRadius">5dp</item>
+    </style>
 </resources>
