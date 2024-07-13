@@ -63,12 +63,16 @@
             android:id="@+id/addButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
+           android:layout_gravity="right|center_horizontal"
             android:layout_margin="20dp"
+            android:backgroundTint="@color/floating_button"
+            app:borderWidth="0dp"
             android:clickable="true"
-            android:contentDescription="Add a Task"
             android:focusable="true"
-            tools:ignore="SpeakableTextPresentCheck" />
+            app:srcCompat="@drawable/ic_add"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:contentDescription="Add a Task"
+            style="@style/CustomFAB"/>
 
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-
-
+    <style name="CustomFAB" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="shapeAppearance">@style/CustomFABShape</item>
+    </style>
+    <style name="CustomFABShape" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">16dp</item>
+    </style>
 </resources>
