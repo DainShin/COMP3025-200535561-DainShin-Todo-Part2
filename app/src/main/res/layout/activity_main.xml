@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
            android:layout_gravity="right|center_horizontal"
             android:layout_margin="20dp"
-            android:backgroundTint="@color/floating_button"
+            android:backgroundTint="@color/background_colour"
             app:borderWidth="0dp"
             android:clickable="true"
             android:focusable="true"

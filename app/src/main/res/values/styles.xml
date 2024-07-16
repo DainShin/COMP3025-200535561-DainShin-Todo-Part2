@@ -9,4 +9,10 @@
     <style name="DetailsButton">
         <item name="cornerRadius">5dp</item>
     </style>
+
+    <style name="DeleteButton">
+        <item name="cornerRadius">5dp</item>
+        <item name="borderWidth">1dp</item>
+
+    </style>
 </resources>

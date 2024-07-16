@@ -1,20 +1,36 @@
 package ca.georgiancollege.todo_part1
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import ca.georgiancollege.todo_part1.databinding.ActivityMainBinding
+
+
+/**
+ * Program Name: COMP3025 – Mobile and Pervasive Computing
+ * Student Name: Dain Shin
+ * Student Number: 200535561
+ * Last Modified: July 21st, 2024
+ * Version: 1.0
+ * Description: This is a To do List application with which user can manage and organise schedule
+ */
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
+        binding.addButton.setOnClickListener {
+            val intent = Intent(this, DetailsActivity::class.java)
+            startActivity(intent)
         }
     }
 }
