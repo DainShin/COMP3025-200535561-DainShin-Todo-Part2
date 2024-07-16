@@ -13,7 +13,7 @@
         android:background="@drawable/shadow_list">
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="something to do"
