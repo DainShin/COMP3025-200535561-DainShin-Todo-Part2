@@ -6,6 +6,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import ca.georgiancollege.todo_part1.databinding.ActivityMainBinding
 
 
@@ -27,6 +28,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Mock data
+        val taskList = listOf(
+            Task("Call the bank", "July 2nd, 2024", true),
+            Task("Submit Android assignment", "July 21st, 2024", false),
+            Task("Book a flight ticket", "August 1st, 2024", false)
+        )
+
+        // RecyclerView
+        val recyclerView = binding.firstRecyclerView
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = TaskAdapter(taskList)
 
         binding.addButton.setOnClickListener {
             val intent = Intent(this, DetailsActivity::class.java)
