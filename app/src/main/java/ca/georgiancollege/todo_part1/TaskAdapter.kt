@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ca.georgiancollege.todo_part1.databinding.TextRowItemBinding
 
-class TaskAdapter(private val taskList: List<Task>)
+class TaskAdapter(private val taskList: List<Task>, private val itemClickListener: (Task) -> Unit)
     : RecyclerView.Adapter<TaskAdapter.ViewHolder>()
 {
     class ViewHolder(val binding: TextRowItemBinding) : RecyclerView.ViewHolder(binding.root)
@@ -23,8 +23,10 @@ class TaskAdapter(private val taskList: List<Task>)
         viewHolder.binding.title.text = currentItem.title
         viewHolder.binding.dueDate.text = currentItem.dueDate
         viewHolder.binding.warningText.visibility = if (currentItem.isOverdue) View.VISIBLE else View.GONE
+
+        viewHolder.binding.root.setOnClickListener {
+            itemClickListener(currentItem)
+        }
     }
-
-
     override fun getItemCount() = taskList.size
 }

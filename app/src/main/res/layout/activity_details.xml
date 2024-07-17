@@ -26,12 +26,12 @@
 
 
             <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enroll graduate"
-        android:textSize="20sp"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enroll graduate"
+                android:textSize="20sp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="20dp"/>
 
 
         <LinearLayout
@@ -53,12 +53,11 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="5dp"
+                android:layout_height="50dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:paddingBottom="20dp"
-                android:text="Enroll the grduate in the blackboard" />
+                android:gravity="center_vertical"
+                android:text="Call the Bank" />
         </LinearLayout>
 
             <LinearLayout
@@ -77,14 +76,25 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Due Date"
+                    android:gravity="center_vertical"
                     android:textColor="@color/label_text_colour"/>
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/details_dueDate"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:paddingLeft="5dp"
-                    android:paddingTop="5dp"
-                    android:text="August 16th, 2024" />
+                    android:gravity="center_vertical"
+                    android:text="July 2nd, 2024" />
+
+                <TextView
+                    android:id="@+id/details_warning"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="right|center"
+                    android:textColor="@color/design_default_color_error"
+                    android:paddingRight="5dp"
+                    android:text="overdue!" />
 
 
             </LinearLayout>

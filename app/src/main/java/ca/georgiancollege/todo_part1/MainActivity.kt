@@ -2,10 +2,7 @@ package ca.georgiancollege.todo_part1
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import ca.georgiancollege.todo_part1.databinding.ActivityMainBinding
 
@@ -30,15 +27,24 @@ class MainActivity : AppCompatActivity() {
 
         // Mock data
         val taskList = listOf(
-            Task("Call the bank", "July 2nd, 2024", true),
-            Task("Submit Android assignment", "July 21st, 2024", false),
-            Task("Book a flight ticket", "August 1st, 2024", false)
+            Task(1,"Call the bank", "July 2nd, 2024", true),
+            Task(2,"Submit Android assignment", "July 21st, 2024", false),
+            Task(3,"Book a flight ticket", "August 1st, 2024", false)
         )
 
         // RecyclerView
-        val recyclerView = binding.firstRecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = TaskAdapter(taskList)
+        binding.firstRecyclerView.layoutManager = LinearLayoutManager(this)
+
+        binding.firstRecyclerView.adapter = TaskAdapter(taskList) { task ->
+            val intent = Intent(this, DetailsActivity::class.java).apply {
+                putExtra("taskId", task.id)
+                putExtra("taskTitle", task.title)
+                putExtra("taskDueDate", task.dueDate)
+                putExtra("taskIsOverdue", task.isOverdue)
+            }
+            startActivity(intent)
+        }
+
 
         binding.addButton.setOnClickListener {
             val intent = Intent(this, DetailsActivity::class.java)
