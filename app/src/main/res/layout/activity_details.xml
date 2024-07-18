@@ -156,7 +156,7 @@
                     android:textSize="@dimen/recycler_text_size"
                     android:text="@string/cancel"
                     style="@style/DetailsButton"
-                    android:backgroundTint="#808080"/>
+                    android:backgroundTint="@color/label_text_colour"/>
             </LinearLayout>
 
         </LinearLayout>
