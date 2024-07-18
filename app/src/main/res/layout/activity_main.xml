@@ -16,7 +16,7 @@
         android:layout_marginEnd="@dimen/background_mx"
         android:layout_marginTop="@dimen/background_my"
         android:layout_marginBottom="@dimen/background_my"
-        android:background="@android:color/white"
+        android:background="@drawable/frame_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
