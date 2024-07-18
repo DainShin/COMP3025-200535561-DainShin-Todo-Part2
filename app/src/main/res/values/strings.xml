@@ -2,4 +2,8 @@
     <string name="app_name">Todo_part1</string>
     <string name="overdue">overdue!</string>
     <string name="due_date">Due Date:</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+    <string name="memo">Memo</string>
 </resources>

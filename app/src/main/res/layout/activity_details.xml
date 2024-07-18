@@ -14,48 +14,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/frame_background"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp">
+        android:layout_marginTop="@dimen/background_my"
+        android:layout_marginBottom="@dimen/background_my"
+        android:layout_marginLeft="@dimen/background_mx"
+        android:layout_marginRight="@dimen/background_mx">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Call the Bank"
-                android:textSize="20sp"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="20dp"/>
-
+                android:textSize="@dimen/task_text_size"
+                android:layout_marginTop="@dimen/background_my"
+                android:layout_marginStart="@dimen/recycler_text_size"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-
+            android:layout_marginTop="@dimen/button_margin"
+            android:layout_marginLeft="@dimen/button_margin"
+            android:layout_marginRight="@dimen/button_margin"
             android:background="@drawable/shadow_list">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:text="Memo"
+                android:padding="@dimen/recycler_text_margin"
+                android:text="@string/memo"
                 android:textColor="@color/label_text_colour"/>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+                android:layout_height="@dimen/memo_padding"
+                android:layout_marginStart="@dimen/recycler_text_margin"
+                android:layout_marginEnd="@dimen/recycler_text_margin"
                 android:gravity="center_vertical"
                 android:text="Call the Bank and make a reservation" />
         </LinearLayout>
@@ -65,18 +62,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
+                android:layout_marginTop="@dimen/button_margin"
+                android:layout_marginLeft="@dimen/button_margin"
+                android:layout_marginRight="@dimen/button_margin"
+                android:paddingTop="@dimen/button_margin"
+                android:paddingBottom="@dimen/button_margin"
                 android:background="@drawable/shadow_list">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Due Date"
+                    android:padding="@dimen/recycler_text_margin"
+                    android:text="@string/due_date"
                     android:gravity="center_vertical"
                     android:textColor="@color/label_text_colour"/>
 
@@ -84,7 +81,8 @@
                     android:id="@+id/details_dueDate"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:paddingLeft="5dp"
+                    android:paddingStart="@dimen/recycler_text_margin"
+                    android:paddingEnd="@dimen/recycler_text_margin"
                     android:gravity="center_vertical"
                     android:text="July 2nd, 2024" />
 
@@ -92,10 +90,11 @@
                     android:id="@+id/details_warning"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:gravity="right|center"
+                    android:gravity="end|center"
                     android:textColor="@color/design_default_color_error"
-                    android:paddingRight="5dp"
-                    android:text="overdue!" />
+                    android:paddingStart="@dimen/recycler_text_margin"
+                    android:paddingEnd="@dimen/recycler_text_margin"
+                    android:text="@string/overdue" />
 
 
             </LinearLayout>
@@ -105,16 +104,16 @@
                 android:id="@+id/calendarView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp" />
+                android:layout_marginStart="@dimen/button_margin"
+                android:layout_marginEnd="@dimen/button_margin" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginBottom="5dp">
+                android:layout_marginStart="@dimen/button_margin"
+                android:layout_marginEnd="@dimen/button_margin"
+                android:layout_marginBottom="@dimen/recycler_text_margin">
 
 
                 <Button
@@ -122,9 +121,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Save"
-                    android:textSize="12sp"
-                    android:layout_marginRight="10dp"
+                    android:text="@string/save"
+                    android:textSize="@dimen/recycler_text_size"
+                    android:layout_marginEnd="@dimen/button_margin"
                     style="@style/DetailsButton"
                     android:backgroundTint="@color/background_colour"/>
 
@@ -133,9 +132,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Delete"
-                    android:textSize="12sp"
-                    android:layout_marginRight="10dp"
+                    android:text="@string/delete"
+                    android:textSize="@dimen/recycler_text_size"
+                    android:layout_marginEnd="@dimen/button_margin"
                     android:backgroundTint="@color/black"
                     style="@style/DetailsButton"/>
 
@@ -144,8 +143,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="12sp"
-                    android:text="Cancel"
+                    android:textSize="@dimen/recycler_text_size"
+                    android:text="@string/cancel"
                     style="@style/DetailsButton"
                     android:backgroundTint="#808080"/>
             </LinearLayout>

@@ -6,9 +6,10 @@
     <dimen name="small_text_size">15sp</dimen>
     <dimen name="title_text_size">30sp</dimen>
     <dimen name="recycler_my">10dp</dimen>
-    <dimen name="add_button_margin">20dp</dimen>
+    <dimen name="button_margin">20dp</dimen>
     <dimen name="recycler_padding">25dp</dimen>
     <dimen name="task_text_size">20sp</dimen>
     <dimen name="recycler_text_size">12sp</dimen>
     <dimen name="recycler_text_margin">5dp</dimen>
+    <dimen name="memo_padding">50dp</dimen>
 </resources>
