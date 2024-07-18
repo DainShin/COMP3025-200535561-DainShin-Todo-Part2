@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="25dp"
+        android:padding="@dimen/recycler_padding"
         android:background="@drawable/shadow_list">
 
         <CheckBox
@@ -17,36 +17,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="something to do"
-            android:textSize="20dp" />
+            android:textSize="@dimen/task_text_size" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp">
+            android:layout_marginStart="@dimen/background_mx">
 
         <TextView
             android:id="@+id/dueDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Due Date:"
-            android:textSize="12sp"/>
+            android:text="@string/due_date"
+            android:textSize="@dimen/recycler_text_size"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_marginStart="@dimen/recycler_text_margin"
                 android:text="July 6th, 2024"
-                android:textSize="12sp"/>
+                android:textSize="@dimen/recycler_text_size"/>
 
             <TextView
                 android:id="@+id/warning_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="overdue!"
-                android:layout_marginLeft="30dp"
+                android:text="@string/overdue"
+                android:layout_marginStart="@dimen/background_mx"
                 android:textColor="@color/design_default_color_error"
-                android:textSize="12sp"/>
+                android:textSize="@dimen/recycler_text_size"/>
 
         </LinearLayout>
 
