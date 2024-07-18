@@ -28,7 +28,7 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enroll graduate"
+                android:text="Call the Bank"
                 android:textSize="20sp"
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="20dp"/>
@@ -57,18 +57,19 @@
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:gravity="center_vertical"
-                android:text="Call the Bank" />
+                android:text="Call the Bank and make a reservation" />
         </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/dueDateSection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
                 android:background="@drawable/shadow_list">
 
                 <TextView
@@ -102,7 +103,7 @@
 
             <CalendarView
                 android:id="@+id/calendarView"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp" />
