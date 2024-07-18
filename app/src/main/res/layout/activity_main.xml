@@ -12,10 +12,10 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginStart="@dimen/background_mx"
+        android:layout_marginEnd="@dimen/background_mx"
+        android:layout_marginTop="@dimen/background_my"
+        android:layout_marginBottom="@dimen/background_my"
         android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,22 +31,21 @@
             android:id="@+id/titleText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="30dp"
+            android:layout_marginTop="@dimen/background_my"
+            android:layout_marginLeft="@dimen/background_mx"
             android:text="To Do"
             android:textColor="@color/text_colour"
-            android:textSize="30sp"
+            android:textSize="@dimen/title_text_size"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/taskNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="30dp"
-            android:text="4 tasks"
+            android:layout_marginLeft="@dimen/background_mx"
+            android:text="3 tasks"
             android:textColor="@color/text_colour"
-            android:textSize="15sp" />
+            android:textSize="@dimen/small_text_size" />
 
         <!-- RecyclerView -->
         <androidx.recyclerview.widget.RecyclerView
@@ -54,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="@dimen/recycler_my"
             tools:listitem="@layout/text_row_item"/>
         </LinearLayout>
 
@@ -63,8 +62,8 @@
             android:id="@+id/addButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:layout_gravity="right|center_horizontal"
-            android:layout_margin="20dp"
+            android:layout_gravity="end|center_horizontal"
+            android:layout_margin="@dimen/add_button_margin"
             android:backgroundTint="@color/background_colour"
             app:borderWidth="0dp"
             android:clickable="true"

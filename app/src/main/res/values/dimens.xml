@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="background_my">30dp</dimen>
+    <dimen name="background_mx">30dp</dimen>
+    <dimen name="small_text_size">15sp</dimen>
+    <dimen name="title_text_size">30sp</dimen>
+    <dimen name="recycler_my">10dp</dimen>
+    <dimen name="add_button_margin">20dp</dimen>
+</resources>
