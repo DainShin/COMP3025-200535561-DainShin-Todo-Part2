@@ -7,7 +7,7 @@ class TaskViewHolder(private val binding: TextRowItemBinding): RecyclerView.View
 {
     fun bind(task: Task)
     {
-        binding.title.text = task.title
+        binding.checkBox.text = task.title
         binding.dueDate.text = task.dueDate
         binding.warningText.text = task.dueDate
     }

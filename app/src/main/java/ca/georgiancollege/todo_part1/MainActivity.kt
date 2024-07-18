@@ -27,9 +27,9 @@ class MainActivity : AppCompatActivity() {
 
         // Mock data
         val taskList = listOf(
-            Task(1,"Call the bank", "July 2nd, 2024", true),
-            Task(2,"Submit Android assignment", "July 21st, 2024", false),
-            Task(3,"Book a flight ticket", "August 1st, 2024", false)
+            Task(1,"Make a clinic reservation", "July 2nd, 2024", true, false),
+            Task(2,"Submit Android assignment", "Today", false, true),
+            Task(3,"Book a flight ticket", "", false, false)
         )
 
         // RecyclerView
@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                 putExtra("taskTitle", task.title)
                 putExtra("taskDueDate", task.dueDate)
                 putExtra("taskIsOverdue", task.isOverdue)
+                putExtra("taskIsFinished", task.isFinished)
             }
             startActivity(intent)
         }

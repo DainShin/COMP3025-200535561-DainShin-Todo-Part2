@@ -30,7 +30,9 @@
                 android:text="Make a clinic reservation"
                 android:textSize="@dimen/task_text_size"
                 android:layout_marginTop="@dimen/background_my"
-                android:layout_marginStart="@dimen/button_margin"/>
+                android:layout_marginBottom="@dimen/background_my"
+                android:layout_marginStart="@dimen/button_margin"
+                android:layout_marginEnd="@dimen/button_margin"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,8 +47,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/recycler_text_margin"
+                android:paddingBottom="@dimen/recycler_text_margin"
                 android:paddingStart="@dimen/recycler_text_margin"
                 android:paddingEnd="@dimen/recycler_text_margin"
+                android:textSize="@dimen/small_text_size"
                 android:text="@string/memo"
                 android:textColor="@color/label_text_colour"/>
 
@@ -54,22 +58,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/memo_padding"
                 android:paddingTop="@dimen/recycler_text_margin"
+                android:paddingBottom="@dimen/recycler_text_margin"
                 android:paddingStart="@dimen/recycler_text_margin"
                 android:paddingEnd="@dimen/recycler_text_margin"
                 android:gravity="center_vertical"
+                android:textSize="@dimen/small_text_size"
                 android:text="Make a clinic reservation (14:00)" />
         </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/dueDateSection"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="70dp"
                 android:orientation="horizontal"
                 android:layout_marginTop="@dimen/button_margin"
                 android:layout_marginLeft="@dimen/button_margin"
                 android:layout_marginRight="@dimen/button_margin"
-                android:paddingTop="@dimen/recycler_padding"
-                android:paddingBottom="@dimen/recycler_padding"
                 android:background="@drawable/shadow_list">
 
                 <TextView
@@ -79,6 +83,7 @@
                     android:paddingEnd="@dimen/recycler_text_margin"
                     android:text="@string/due_date"
                     android:gravity="center_vertical"
+                    android:textSize="@dimen/small_text_size"
                     android:textColor="@color/label_text_colour"/>
 
                 <TextView
@@ -88,6 +93,7 @@
                     android:paddingStart="@dimen/recycler_text_margin"
                     android:paddingEnd="@dimen/recycler_text_margin"
                     android:gravity="center_vertical"
+                    android:textSize="@dimen/small_text_size"
                     android:text="July 2nd, 2024" />
 
                 <TextView
@@ -96,7 +102,7 @@
                     android:layout_height="match_parent"
                     android:gravity="end|center"
                     android:textColor="@color/design_default_color_error"
-
+                    android:textSize="@dimen/small_text_size"
                     android:paddingStart="@dimen/recycler_text_margin"
                     android:paddingEnd="@dimen/recycler_text_margin"
                     android:text="@string/overdue" />
@@ -117,8 +123,7 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_marginStart="@dimen/button_margin"
-                android:layout_marginEnd="@dimen/button_margin"
-                android:layout_marginBottom="@dimen/recycler_text_margin">
+                android:layout_marginEnd="@dimen/button_margin">
 
 
                 <Button
