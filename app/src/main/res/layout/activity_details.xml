@@ -32,7 +32,8 @@
                 android:layout_marginTop="@dimen/background_my"
                 android:layout_marginBottom="@dimen/background_my"
                 android:layout_marginStart="@dimen/button_margin"
-                android:layout_marginEnd="@dimen/button_margin"/>
+                android:layout_marginEnd="@dimen/button_margin"
+                style="@style/CheckboxColour"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -123,7 +124,8 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:layout_marginStart="@dimen/button_margin"
-                android:layout_marginEnd="@dimen/button_margin">
+                android:layout_marginEnd="@dimen/button_margin"
+                android:layout_marginTop="@dimen/button_margin">
 
 
                 <Button

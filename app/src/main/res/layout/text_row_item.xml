@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/recycler_text_margin"
-                android:text="July 6th, 2024"
+                android:text=""
                 android:textSize="@dimen/recycler_text_size"/>
 
             <TextView

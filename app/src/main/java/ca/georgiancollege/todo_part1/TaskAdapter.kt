@@ -20,39 +20,16 @@ import ca.georgiancollege.todo_part1.databinding.TextRowItemBinding
  * Version: 1.0
  * Description: This is a To do List application with which user can manage and organise schedule
  */
-class TaskAdapter(private val onItemClicked: (Task) -> Unit)  :
-    ListAdapter<Task, TaskViewHolder>(TaskComparator())
-{
+class TaskAdapter(private val onItemClicked: (Task) -> Unit) :
+    ListAdapter<Task, TaskViewHolder>(TaskComparator()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder
-    {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val binding = TextRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TaskViewHolder(binding)
+        return TaskViewHolder(binding, onItemClicked)
     }
 
-    override fun onBindViewHolder(holder: TaskViewHolder, position: Int)
-    {
+    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current)
-
-        holder.binding.warningText.visibility = if (current.isOverdue) View.VISIBLE else View.GONE
-        holder.applyStrikethrough(holder.binding.checkBox, current.isFinished)
-
-        holder.binding.checkBox.setOnCheckedChangeListener { _, isFinished ->
-            current.isFinished = isFinished
-            holder.applyStrikethrough(holder.binding.checkBox, isFinished)
-        }
-
-        holder.itemView.setOnClickListener {
-            onItemClicked(current)
-        }
-    }
-
-    private fun applyStrikethrough(checkBox: CheckBox, isChecked: Boolean) {
-        if (isChecked) {
-            checkBox.paintFlags = checkBox.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-        } else {
-            checkBox.paintFlags = checkBox.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-        }
     }
 }
