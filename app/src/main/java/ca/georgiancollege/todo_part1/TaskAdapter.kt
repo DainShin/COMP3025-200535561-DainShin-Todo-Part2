@@ -6,37 +6,45 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ca.georgiancollege.todo_part1.databinding.TextRowItemBinding
 
-class TaskAdapter(private val taskList: List<Task>, private val itemClickListener: (Task) -> Unit)
-    : RecyclerView.Adapter<TaskAdapter.ViewHolder>()
+/**
+ * Program Name: COMP3025 – Mobile and Pervasive Computing
+ * File Name: TaskAdapter
+ * File Description: This is a RecyclerView adapter that binds a list of tasks to the RecyclerView, handles item click events, and updates the task status with a strikethrough effect when a task is marked as finished.
+ * Student Name: Dain Shin
+ * Student Number: 200535561
+ * Last Modified: July 21st, 2024
+ * Version: 1.0
+ * Description: This is a To do List application with which user can manage and organise schedule
+ */
+class TaskAdapter(private val onItemClicked: (Task) -> Unit)  :
+    ListAdapter<Task, TaskViewHolder>(TaskComparator())
 {
-    class ViewHolder(val binding: TextRowItemBinding) : RecyclerView.ViewHolder(binding.root)
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder
     {
-        val binding = TextRowItemBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
-        return ViewHolder(binding)
+        val binding = TextRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return TaskViewHolder(binding)
     }
 
-    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int)
+    override fun onBindViewHolder(holder: TaskViewHolder, position: Int)
     {
-        val currentItem = taskList[position]
-        viewHolder.binding.checkBox.text = currentItem.title
-        viewHolder.binding.dueDate.text = currentItem.dueDate
-        viewHolder.binding.warningText.visibility = if (currentItem.isOverdue) View.VISIBLE else View.GONE
+        val current = getItem(position)
+        holder.bind(current)
 
-        viewHolder.binding.checkBox.isChecked = currentItem.isFinished
-        applyStrikethrough(viewHolder.binding.checkBox, currentItem.isFinished)
+        holder.binding.warningText.visibility = if (current.isOverdue) View.VISIBLE else View.GONE
+        holder.applyStrikethrough(holder.binding.checkBox, current.isFinished)
 
-        viewHolder.binding.checkBox.setOnCheckedChangeListener { _, isFinished ->
-            currentItem.isFinished = isFinished
-            applyStrikethrough(viewHolder.binding.checkBox, isFinished)
+        holder.binding.checkBox.setOnCheckedChangeListener { _, isFinished ->
+            current.isFinished = isFinished
+            holder.applyStrikethrough(holder.binding.checkBox, isFinished)
         }
 
-        viewHolder.binding.root.setOnClickListener {
-            itemClickListener(currentItem)
+        holder.itemView.setOnClickListener {
+            onItemClicked(current)
         }
     }
 
@@ -47,6 +55,4 @@ class TaskAdapter(private val taskList: List<Task>, private val itemClickListene
             checkBox.paintFlags = checkBox.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
         }
     }
-
-    override fun getItemCount() = taskList.size
 }
