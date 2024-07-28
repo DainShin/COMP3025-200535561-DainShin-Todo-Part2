@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "609758530967",
+    "project_id": "comp3025-m2024-todo",
+    "storage_bucket": "comp3025-m2024-todo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609758530967:android:770388fcfc93b223ea88d2",
+        "android_client_info": {
+          "package_name": "ca.georgiancollege.todo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0Z3IqqHA_MxZADq3uoY8Sq0KIkyS-kLQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
