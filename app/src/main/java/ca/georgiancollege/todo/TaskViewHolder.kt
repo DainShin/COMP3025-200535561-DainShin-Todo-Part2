@@ -1,10 +1,10 @@
-package ca.georgiancollege.todo_part1
+package ca.georgiancollege.todo
 
 import android.graphics.Paint
 import android.view.View
 import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
-import ca.georgiancollege.todo_part1.databinding.TextRowItemBinding
+import ca.georgiancollege.todo.databinding.TextRowItemBinding
 
 
 /**

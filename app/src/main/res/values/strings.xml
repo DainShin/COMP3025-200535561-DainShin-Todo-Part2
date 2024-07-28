@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Todo_part1</string>
+    <string name="app_name">Todo</string>
     <string name="overdue">overdue!</string>
     <string name="due_date">Due Date:</string>
     <string name="save">Save</string>

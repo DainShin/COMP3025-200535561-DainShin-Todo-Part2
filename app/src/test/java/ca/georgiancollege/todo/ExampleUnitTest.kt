@@ -1,4 +1,4 @@
-package ca.georgiancollege.todo_part1
+package ca.georgiancollege.todo
 
 import org.junit.Test
 

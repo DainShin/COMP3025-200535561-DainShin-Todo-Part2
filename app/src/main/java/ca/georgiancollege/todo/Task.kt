@@ -1,4 +1,4 @@
-package ca.georgiancollege.todo_part1
+package ca.georgiancollege.todo
 
 /**
  * Program Name: COMP3025 – Mobile and Pervasive Computing

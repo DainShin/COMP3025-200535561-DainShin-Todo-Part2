@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "ca.georgiancollege.todo_part1"
+    namespace = "ca.georgiancollege.todo"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "ca.georgiancollege.todo_part1"
+        applicationId = "ca.georgiancollege.todo"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

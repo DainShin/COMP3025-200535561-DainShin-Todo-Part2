@@ -1,10 +1,10 @@
-package ca.georgiancollege.todo_part1
+package ca.georgiancollege.todo
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import ca.georgiancollege.todo_part1.databinding.ActivityMainBinding
+import ca.georgiancollege.todo.databinding.ActivityMainBinding
 
 
 /**

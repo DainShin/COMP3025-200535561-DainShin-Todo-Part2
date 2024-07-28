@@ -1,14 +1,9 @@
-package ca.georgiancollege.todo_part1
+package ca.georgiancollege.todo
 
-import android.content.res.ColorStateList
-import android.graphics.Paint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import ca.georgiancollege.todo_part1.databinding.TextRowItemBinding
+import ca.georgiancollege.todo.databinding.TextRowItemBinding
 
 /**
  * Program Name: COMP3025 – Mobile and Pervasive Computing

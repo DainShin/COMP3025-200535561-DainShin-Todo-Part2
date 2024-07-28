@@ -1,4 +1,4 @@
-package ca.georgiancollege.todo_part1
+package ca.georgiancollege.todo
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

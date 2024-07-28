@@ -1,10 +1,10 @@
-package ca.georgiancollege.todo_part1
+package ca.georgiancollege.todo
 
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import ca.georgiancollege.todo_part1.databinding.ActivityDetailsBinding
+import ca.georgiancollege.todo.databinding.ActivityDetailsBinding
 
 /**
  * Program Name: COMP3025 – Mobile and Pervasive Computing
