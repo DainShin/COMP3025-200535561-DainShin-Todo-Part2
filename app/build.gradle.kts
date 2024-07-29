@@ -55,6 +55,13 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
     implementation("com.google.firebase:firebase-firestore")
 
+    // viewmodel & live data
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.3")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.8.3")
+    implementation("androidx.activity:activity-ktx:1.9.0")
+
+
+
     // testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
