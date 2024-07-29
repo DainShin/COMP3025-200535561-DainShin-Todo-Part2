@@ -15,7 +15,7 @@ import ca.georgiancollege.todo.databinding.TextRowItemBinding
  * Version: 1.0
  * Description: This is a To do List application with which user can manage and organise schedule
  */
-class TaskAdapter(private val onItemClicked: (Task) -> Unit) :
+class TaskListAdapter(private val onItemClicked: (Task) -> Unit) :
     ListAdapter<Task, TaskViewHolder>(TaskComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {

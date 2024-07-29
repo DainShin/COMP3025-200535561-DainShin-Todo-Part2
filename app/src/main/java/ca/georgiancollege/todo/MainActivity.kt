@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val adapter = TaskAdapter { task: Task ->
+    private val adapter = TaskListAdapter { task: Task ->
         val intent = Intent(this, DetailsActivity::class.java).apply {
             putExtra("taskId", task.id)
         }

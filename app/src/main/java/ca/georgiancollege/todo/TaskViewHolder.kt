@@ -22,7 +22,7 @@ class TaskViewHolder(val binding: TextRowItemBinding, private val onItemClicked:
 
     fun bind(task: Task) {
         binding.checkBox.text = task.title
-        binding.dueDate.text = task.dueDate
+        binding.dueDate.text = task.dueDate.toString()
         binding.checkBox.isChecked = task.isFinished
         binding.warningText.visibility = if (task.isOverdue) View.VISIBLE else View.GONE
         applyStrikethrough(binding.checkBox, task.isFinished)
