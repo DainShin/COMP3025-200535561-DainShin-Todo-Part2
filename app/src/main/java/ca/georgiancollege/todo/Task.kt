@@ -1,5 +1,9 @@
 package ca.georgiancollege.todo
 
+import com.google.firebase.firestore.DocumentId
+import com.google.firebase.firestore.IgnoreExtraProperties
+import java.util.Date
+
 /**
  * Program Name: COMP3025 – Mobile and Pervasive Computing
  * File Name: Task
@@ -10,10 +14,15 @@ package ca.georgiancollege.todo
  * Version: 1.0
  * Description: This is a To do List application with which user can manage and organise schedule
  */
+
+@IgnoreExtraProperties
 data class Task(
-    val id: Int = 0,
+    @DocumentId val id: String = "",
     val title: String,
-    val dueDate: String,
+    val dueDate: Date?,
     val isOverdue: Boolean,
     var isFinished: Boolean
 )
+{
+    constructor() : this("", "", null, false, false)
+}
