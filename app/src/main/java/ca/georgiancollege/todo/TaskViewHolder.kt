@@ -17,7 +17,7 @@ import ca.georgiancollege.todo.databinding.TextRowItemBinding
  * Version: 1.0
  * Description: This is a To do List application with which user can manage and organise schedule
  */
-class TaskViewHolder(val binding: TextRowItemBinding, private val onItemClicked: (Task) -> Unit) :
+class TaskViewHolder(private val binding: TextRowItemBinding, private val onItemClicked: (Task) -> Unit) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(task: Task) {

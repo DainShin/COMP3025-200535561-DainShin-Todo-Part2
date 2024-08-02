@@ -2,9 +2,14 @@ package ca.georgiancollege.todo
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import ca.georgiancollege.todo.databinding.ActivityMainBinding
+
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 /**
@@ -19,8 +24,10 @@ import ca.georgiancollege.todo.databinding.ActivityMainBinding
  */
 
 class MainActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: TaskViewModel by viewModels()
+
+    private lateinit var dataManager: DataManager
 
     private val adapter = TaskListAdapter { task: Task ->
         val intent = Intent(this, DetailsActivity::class.java).apply {
@@ -34,22 +41,25 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Initialize Firestore and DataManager
+        FirebaseFirestore.setLoggingEnabled(true)
+        dataManager = DataManager.instance()
+
         // RecyclerView
         binding.firstRecyclerView.layoutManager = LinearLayoutManager(this)
-
-        // Mock data
-        val taskList = listOf(
-            Task(1,"Make a clinic reservation", "July 2nd, 2024", true, false),
-            Task(2,"Submit Android assignment", "Today", false, true),
-            Task(3,"Book a flight ticket", "", false, false)
-        )
-
-        adapter.submitList(taskList)
         binding.firstRecyclerView.adapter = adapter
+
+        viewModel.loadAllTasks()
 
         binding.addButton.setOnClickListener {
             val intent = Intent(this, DetailsActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    override fun onResume()
+    {
+        super.onResume()
+        viewModel.loadAllTasks()
     }
 }

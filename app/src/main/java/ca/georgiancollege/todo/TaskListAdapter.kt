@@ -26,5 +26,8 @@ class TaskListAdapter(private val onItemClicked: (Task) -> Unit) :
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current)
+        holder.itemView.setOnClickListener {
+            onItemClicked(current)
+        }
     }
 }
