@@ -51,7 +51,7 @@ class TaskViewModel : ViewModel()
     }
 
     // Function to save or update a TVShow in the DataManager
-    fun saveTVShow(task: Task) {
+    fun saveTask(task: Task) {
         viewModelScope.launch {
             if (task.id.isEmpty()) {
                 dataManager.insert(task)
@@ -63,7 +63,7 @@ class TaskViewModel : ViewModel()
     }
 
     // Function to delete a TVShow from the DataManager
-    fun deleteTVShow(task: Task) {
+    fun deleteTask(task: Task) {
         viewModelScope.launch {
             dataManager.delete(task)
             loadAllTasks()

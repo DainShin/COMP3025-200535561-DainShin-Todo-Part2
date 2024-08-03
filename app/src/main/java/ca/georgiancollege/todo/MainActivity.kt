@@ -49,6 +49,10 @@ class MainActivity : AppCompatActivity() {
         binding.firstRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.firstRecyclerView.adapter = adapter
 
+        viewModel.tasks.observe(this) { tasks ->
+            adapter.submitList(tasks)
+        }
+
         viewModel.loadAllTasks()
 
         binding.addButton.setOnClickListener {
