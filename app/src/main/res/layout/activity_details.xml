@@ -85,7 +85,7 @@
                 android:gravity="center_vertical"
                 android:textSize="@dimen/small_text_size"
                 android:background="@android:color/transparent"
-                android:text="Enter Details" />
+                android:hint="Enter Details" />
         </LinearLayout>
 
             <LinearLayout
@@ -115,8 +115,7 @@
                     android:paddingStart="@dimen/recycler_text_margin"
                     android:paddingEnd="@dimen/recycler_text_margin"
                     android:gravity="center_vertical"
-                    android:textSize="@dimen/small_text_size"
-                    android:text="July 2nd, 2024" />
+                    android:textSize="@dimen/small_text_size" />
 
                 <TextView
                     android:id="@+id/details_warning"
@@ -128,10 +127,7 @@
                     android:paddingStart="@dimen/recycler_text_margin"
                     android:paddingEnd="@dimen/recycler_text_margin"
                     android:text="@string/overdue" />
-
-
             </LinearLayout>
-
 
             <CalendarView
                 android:id="@+id/calendarView"

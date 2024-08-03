@@ -45,6 +45,7 @@ class MainActivity : AppCompatActivity() {
         FirebaseFirestore.setLoggingEnabled(true)
         dataManager = DataManager.instance()
 
+
         // RecyclerView
         binding.firstRecyclerView.layoutManager = LinearLayoutManager(this)
         binding.firstRecyclerView.adapter = adapter

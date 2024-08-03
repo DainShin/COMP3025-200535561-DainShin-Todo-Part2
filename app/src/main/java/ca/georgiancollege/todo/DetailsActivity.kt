@@ -1,5 +1,6 @@
 package ca.georgiancollege.todo
 
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,8 +10,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import ca.georgiancollege.todo.databinding.ActivityDetailsBinding
 import com.google.android.gms.tasks.Task
+import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 import java.util.UUID
 
 /**
@@ -53,25 +56,61 @@ class DetailsActivity: AppCompatActivity()
         // date
         val calendar: Calendar = Calendar.getInstance()
         var selectedDate: Date? = null
+        val dateFormat = SimpleDateFormat("MMM d, yyyy", Locale.getDefault())
         binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             calendar.set(year, month, dayOfMonth)
             val selectedDateInMillis = calendar.timeInMillis
 
-            // 현재 날짜와 비교하여 과거 날짜 선택 방지
+            // compare the selected date with the current date
             if (selectedDateInMillis >= today.timeInMillis) {
                 selectedDate = calendar.time
-                binding.detailsDueDate.text = selectedDate.toString()
+                binding.detailsDueDate.text = selectedDate?.let { dateFormat.format(it) }
             } else {
-                Toast.makeText(this, "오늘 이후의 날짜만 선택할 수 있습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please select a proper date", Toast.LENGTH_SHORT).show()
             }
 
         }
+
+        binding.detailsWarning.visibility = View.GONE
 
         viewModel.task.observe(this) { task ->
             task?.let {
                 binding.editTaskTitle.setText(it.title)
                 binding.editDetails.setText(it.details)
-                binding.detailsDueDate.text = it.dueDate?.toString() ?: ""
+                binding.detailsDueDate.text = it.dueDate?.let { date -> dateFormat.format(date) } ?: ""
+
+                // Check if the due date is before today
+                if (it.dueDate != null) {
+                    val dueDateCalendar = Calendar.getInstance().apply { time = it.dueDate }
+                    if (dueDateCalendar.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
+                        dueDateCalendar.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)) {
+                        binding.detailsWarning.visibility = View.GONE
+                    } else if (it.dueDate.before(today.time)) {
+                        binding.detailsWarning.visibility = View.VISIBLE
+                    } else {
+                        binding.detailsWarning.visibility = View.GONE
+                    }
+                } else {
+                    binding.detailsWarning.visibility = View.GONE
+                }
+
+                binding.checkbox.isChecked = it.isFinished
+                if (it.isFinished) {
+                    binding.editTaskTitle.paintFlags = binding.editTaskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                } else {
+                    binding.editTaskTitle.paintFlags = binding.editTaskTitle.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                }
+            }
+        }
+
+        // checkbox
+        binding.checkbox.setOnCheckedChangeListener {_, isChecked ->
+            if(isChecked) {
+                binding.editTaskTitle.paintFlags = binding.editTaskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                viewModel.task.value?.isFinished = true
+            } else {
+                binding.editTaskTitle.paintFlags = binding.editTaskTitle.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                viewModel.task.value?.isFinished = false
             }
         }
 
@@ -86,7 +125,6 @@ class DetailsActivity: AppCompatActivity()
         binding.cancelButton.setOnClickListener {
             finish()
         }
-
 
         // Calendar
         // hide calendarView by default
@@ -108,8 +146,8 @@ class DetailsActivity: AppCompatActivity()
         val title = binding.editTaskTitle.text.toString()
         val details = binding.editDetails.text.toString()
         val dueDate = selectedDate
-        val isOverdue = dueDate?.let { it.before(Date()) } ?: false
-        val isFinished = false
+        val isOverdue = dueDate?.before(Date()) ?: false
+        val isFinished = binding.checkbox.isChecked
 
         if (title.isNotEmpty())
         {

@@ -19,7 +19,7 @@ import java.util.Date
 data class Task(
     @DocumentId val id: String = "",
     val title: String,
-    val details: String,
+    val details: String?,
     val dueDate: Date?,
     val isOverdue: Boolean,
     var isFinished: Boolean

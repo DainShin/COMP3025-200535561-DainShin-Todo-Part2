@@ -7,8 +7,7 @@ import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.coroutines.launch
 
 
-class TaskViewModel : ViewModel()
-{
+class TaskViewModel : ViewModel() {
     private val dataManager = DataManager.instance()
 
     private val m_tasks = MutableLiveData<List<Task>>()
@@ -21,8 +20,7 @@ class TaskViewModel : ViewModel()
     private val firestore = FirebaseFirestore.getInstance()
     private var tasksListener: ListenerRegistration? = null
 
-    fun loadAllTasks()
-    {
+    fun loadAllTasks() {
         // Remove the previous listener if it exists
         tasksListener?.remove()
 
@@ -66,6 +64,20 @@ class TaskViewModel : ViewModel()
     fun deleteTask(task: Task) {
         viewModelScope.launch {
             dataManager.delete(task)
+            loadAllTasks()
+        }
+    }
+
+    fun updateTask(task: Task) {
+        viewModelScope.launch {
+            val taskDocumentRef = firestore.collection("tasks").document(task.id)
+            taskDocumentRef.set(task)
+                .addOnSuccessListener {
+                    Log.d("TaskViewModel", "Task successfully updated!")
+                }
+                .addOnFailureListener { e ->
+                    Log.w("TaskViewModel", "Error updating task", e)
+                }
             loadAllTasks()
         }
     }
