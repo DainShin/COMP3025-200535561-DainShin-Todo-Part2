@@ -17,12 +17,13 @@ import ca.georgiancollege.todo.databinding.TextRowItemBinding
  */
 class TaskListAdapter(
     private val onItemClicked: (Task) -> Unit,
-    //private val viewModel: TaskViewModel
+   // private val viewModel: TaskViewModel
 ) : ListAdapter<Task, TaskViewHolder>(TaskComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         val binding = TextRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return TaskViewHolder(binding, onItemClicked)
+        //return TaskViewHolder(binding, onItemClicked)
+        return TaskViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {

@@ -26,6 +26,9 @@ class TaskViewModel : ViewModel() {
 
         tasksListener = firestore.collection("tasks")
             .addSnapshotListener { snapshot, e ->
+
+                Log.w("e의값", e)
+
                 if (e != null) {
                     Log.w("TaskViewModel", "Listen failed.", e)
                     return@addSnapshotListener

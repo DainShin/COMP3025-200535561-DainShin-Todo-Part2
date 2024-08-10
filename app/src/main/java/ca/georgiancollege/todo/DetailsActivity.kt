@@ -9,7 +9,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import ca.georgiancollege.todo.databinding.ActivityDetailsBinding
-import com.google.android.gms.tasks.Task
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -22,7 +21,7 @@ import java.util.UUID
  * File Description: This file is for the Details View where user can edit or delete the item
  * Student Name: Dain Shin
  * Student Number: 200535561
- * Last Modified: July 21st, 2024
+ * Last Modified: August 10st, 2024
  * Version: 1.0
  * App Description: This is a To do List application with which user can manage and organise schedule
  */
@@ -59,16 +58,18 @@ class DetailsActivity: AppCompatActivity()
         val dateFormat = SimpleDateFormat("MMM d, yyyy", Locale.getDefault())
         binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             calendar.set(year, month, dayOfMonth)
-            val selectedDateInMillis = calendar.timeInMillis
+            selectedDate = calendar.time
+            binding.detailsDueDate.text = selectedDate?.let { dateFormat.format(it) }
 
-            // compare the selected date with the current date
-            if (selectedDateInMillis >= today.timeInMillis) {
-                selectedDate = calendar.time
-                binding.detailsDueDate.text = selectedDate?.let { dateFormat.format(it) }
-            } else {
-                Toast.makeText(this, "Please select a proper date", Toast.LENGTH_SHORT).show()
+            // Check if the selected date is before today
+            if (selectedDate != null) {
+                if (selectedDate!!.before(today.time)) {
+                    binding.detailsWarning.visibility = View.VISIBLE
+
+                } else {
+                    binding.detailsWarning.visibility = View.GONE
+                }
             }
-
         }
 
         binding.detailsWarning.visibility = View.GONE
@@ -79,14 +80,15 @@ class DetailsActivity: AppCompatActivity()
                 binding.editDetails.setText(it.details)
                 binding.detailsDueDate.text = it.dueDate?.let { date -> dateFormat.format(date) } ?: ""
 
-                // Check if the due date is before today
+                // If the due date is before today -> warning message
                 if (it.dueDate != null) {
                     val dueDateCalendar = Calendar.getInstance().apply { time = it.dueDate }
                     if (dueDateCalendar.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
                         dueDateCalendar.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)) {
                         binding.detailsWarning.visibility = View.GONE
-                    } else if (it.dueDate.before(today.time)) {
+                    } else if (it.dueDate.before(today.time) && !it.isFinished) {
                         binding.detailsWarning.visibility = View.VISIBLE
+
                     } else {
                         binding.detailsWarning.visibility = View.GONE
                     }
@@ -94,6 +96,7 @@ class DetailsActivity: AppCompatActivity()
                     binding.detailsWarning.visibility = View.GONE
                 }
 
+                // isFinished
                 binding.checkbox.isChecked = it.isFinished
                 if (it.isFinished) {
                     binding.editTaskTitle.paintFlags = binding.editTaskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
@@ -145,8 +148,7 @@ class DetailsActivity: AppCompatActivity()
     {
         val title = binding.editTaskTitle.text.toString()
         val details = binding.editDetails.text.toString()
-        val dueDate = selectedDate
-        val isOverdue = dueDate?.before(Date()) ?: false
+        val isOverdue = selectedDate?.before(Date()) ?: false
         val isFinished = binding.checkbox.isChecked
 
         if (title.isNotEmpty())
@@ -155,10 +157,13 @@ class DetailsActivity: AppCompatActivity()
                 id = taskId ?: UUID.randomUUID().toString(),
                 title = title,
                 details = details,
-                dueDate = dueDate,
+                dueDate = selectedDate,
                 isOverdue = isOverdue,
                 isFinished = isFinished
             )
+
+            Log.w("확인", "isOverDue: ${isOverdue}, isFinished: ${isFinished}")
+
             viewModel.saveTask(task)
             Toast.makeText(this,"Task Saved",  Toast.LENGTH_SHORT).show()
             finish()

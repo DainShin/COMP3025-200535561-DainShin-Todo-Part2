@@ -6,7 +6,10 @@ import android.view.View
 import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
 import ca.georgiancollege.todo.databinding.TextRowItemBinding
+import com.google.type.DateTime
 import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 
@@ -22,27 +25,37 @@ import java.util.Locale
  */
 class TaskViewHolder(
     private val binding: TextRowItemBinding,
-    private val onItemClicked: (Task) -> Unit,
+    //private val onItemClicked: (Task) -> Unit,
     //private val viewModel: TaskViewModel
 ) : RecyclerView.ViewHolder(binding.root) {
+
+    private val today = Calendar.getInstance()
 
     fun bind(task: Task) {
         binding.checkBox.text = task.title
         val dateFormat = SimpleDateFormat("MMM d, yyyy", Locale.getDefault())
         binding.dueDate.text = task.dueDate?.let { dateFormat.format(it) } ?: ""
         binding.checkBox.isChecked = task.isFinished
-        binding.warningText.visibility = if (task.isOverdue) View.VISIBLE else View.GONE
+
+        if (task.dueDate?.before(today.time) == true && !binding.checkBox.isChecked) {
+            binding.warningText.visibility = View.VISIBLE
+        } else {
+            binding.warningText.visibility = View.INVISIBLE
+        }
+
+        //Log.d("TaskViewHolder", "title: ${task.title}, dueDate: ${task.dueDate}, isOverdue: ${task.isOverdue}, isFinished: ${task.isFinished}")
+
+
         applyStrikethrough(binding.checkBox, task.isFinished)
 
         binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
             task.isFinished = isChecked
             applyStrikethrough(binding.checkBox, isChecked)
-            Log.i("체크박스", "태스크완료")
         }
 
-        itemView.setOnClickListener {
-            onItemClicked(task)
-        }
+//        itemView.setOnClickListener {
+//            onItemClicked(task)
+//        }
     }
 
     private fun applyStrikethrough(checkBox: CheckBox, isChecked: Boolean) {
