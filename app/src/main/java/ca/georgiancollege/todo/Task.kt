@@ -10,7 +10,7 @@ import java.util.Date
  * File Description: This is a model class which defines a task with properties for its ID, title, due date, whether it is overdue, and whether it is finished
  * Student Name: Dain Shin
  * Student Number: 200535561
- * Last Modified: July 21st, 2024
+ * Last Modified: August 11st, 2024
  * Version: 1.0
  * Description: This is a To do List application with which user can manage and organise schedule
  */
@@ -18,12 +18,12 @@ import java.util.Date
 @IgnoreExtraProperties
 data class Task(
     @DocumentId val id: String = "",
-    val title: String,
-    val details: String?,
-    val dueDate: Date?,
-    val isOverdue: Boolean,
-    var isFinished: Boolean
+    val name: String,
+    val notes: String,
+    val dueDate: Date? = Date(),
+    val hasDueDate: Boolean,
+    var isCompleted: Boolean
 )
 {
-    constructor() : this("", "", "",null, false, false)
+    constructor() : this("", "", "", Date(), false, false)
 }

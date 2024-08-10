@@ -29,12 +29,19 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var dataManager: DataManager
 
-    private val adapter = TaskListAdapter { task: Task ->
-        val intent = Intent(this, DetailsActivity::class.java).apply {
-            putExtra("taskId", task.id)
+
+    // Adapter for the RecyclerView, with a click listener to open the DetailsActivity
+    private val adapter = TaskListAdapter(
+        onItemClicked = { task: Task ->
+            val intent = Intent(this, DetailsActivity::class.java).apply {
+                putExtra("taskId", task.id)
+            }
+            startActivity(intent)
+        },
+        onItemCheckedChanged = { task: Task ->
+            viewModel.updateTask(task) // ViewModel의 updateTask 메소드 호출
         }
-        startActivity(intent)
-    }
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,7 +51,6 @@ class MainActivity : AppCompatActivity() {
         // Initialize Firestore and DataManager
         FirebaseFirestore.setLoggingEnabled(true)
         dataManager = DataManager.instance()
-
 
         // RecyclerView
         binding.firstRecyclerView.layoutManager = LinearLayoutManager(this)

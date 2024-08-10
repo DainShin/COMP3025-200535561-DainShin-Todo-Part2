@@ -21,7 +21,7 @@ import java.util.UUID
  * File Description: This file is for the Details View where user can edit or delete the item
  * Student Name: Dain Shin
  * Student Number: 200535561
- * Last Modified: August 10st, 2024
+ * Last Modified: August 11st, 2024
  * Version: 1.0
  * App Description: This is a To do List application with which user can manage and organise schedule
  */
@@ -76,8 +76,8 @@ class DetailsActivity: AppCompatActivity()
 
         viewModel.task.observe(this) { task ->
             task?.let {
-                binding.editTaskTitle.setText(it.title)
-                binding.editDetails.setText(it.details)
+                binding.editTaskTitle.setText(it.name)
+                binding.editDetails.setText(it.notes)
                 binding.detailsDueDate.text = it.dueDate?.let { date -> dateFormat.format(date) } ?: ""
 
                 // If the due date is before today -> warning message
@@ -86,7 +86,7 @@ class DetailsActivity: AppCompatActivity()
                     if (dueDateCalendar.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
                         dueDateCalendar.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)) {
                         binding.detailsWarning.visibility = View.GONE
-                    } else if (it.dueDate.before(today.time) && !it.isFinished) {
+                    } else if (it.dueDate.before(today.time) && !it.isCompleted) {
                         binding.detailsWarning.visibility = View.VISIBLE
 
                     } else {
@@ -97,8 +97,8 @@ class DetailsActivity: AppCompatActivity()
                 }
 
                 // isFinished
-                binding.checkbox.isChecked = it.isFinished
-                if (it.isFinished) {
+                binding.checkbox.isChecked = it.isCompleted
+                if (it.isCompleted) {
                     binding.editTaskTitle.paintFlags = binding.editTaskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 } else {
                     binding.editTaskTitle.paintFlags = binding.editTaskTitle.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
@@ -110,10 +110,10 @@ class DetailsActivity: AppCompatActivity()
         binding.checkbox.setOnCheckedChangeListener {_, isChecked ->
             if(isChecked) {
                 binding.editTaskTitle.paintFlags = binding.editTaskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-                viewModel.task.value?.isFinished = true
+                viewModel.task.value?.isCompleted = true
             } else {
                 binding.editTaskTitle.paintFlags = binding.editTaskTitle.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
-                viewModel.task.value?.isFinished = false
+                viewModel.task.value?.isCompleted = false
             }
         }
 
@@ -146,23 +146,28 @@ class DetailsActivity: AppCompatActivity()
 
     private fun saveTask(selectedDate: Date?)
     {
-        val title = binding.editTaskTitle.text.toString()
-        val details = binding.editDetails.text.toString()
-        val isOverdue = selectedDate?.before(Date()) ?: false
-        val isFinished = binding.checkbox.isChecked
+        val name = binding.editTaskTitle.text.toString()
+        val notes = binding.editDetails.text.toString()
 
-        if (title.isNotEmpty())
+        val hasDueDate = selectedDate != null
+        val dueDate = if (hasDueDate) {
+            selectedDate
+        } else {
+            Date()  // Set dueDate to current date if hasDueDate is false
+        }
+
+        val isCompleted = binding.checkbox.isChecked
+
+        if (name.isNotEmpty())
         {
             val task = Task(
                 id = taskId ?: UUID.randomUUID().toString(),
-                title = title,
-                details = details,
-                dueDate = selectedDate,
-                isOverdue = isOverdue,
-                isFinished = isFinished
+                name = name,
+                notes = notes,
+                dueDate = dueDate,
+                hasDueDate = true,
+                isCompleted = isCompleted
             )
-
-            Log.w("확인", "isOverDue: ${isOverdue}, isFinished: ${isFinished}")
 
             viewModel.saveTask(task)
             Toast.makeText(this,"Task Saved",  Toast.LENGTH_SHORT).show()
