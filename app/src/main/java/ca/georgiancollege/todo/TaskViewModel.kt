@@ -6,7 +6,16 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import kotlinx.coroutines.launch
 
-
+/**
+ * Program Name: COMP3025 – Mobile and Pervasive Computing
+ * File Name: TaskViewModel
+ * File Description: TaskViewModel manages loading, saving, updating, and deleting tasks using Firebase Firestore and DataManager, providing real-time data updates to the UI via LiveData
+ * Student Name: Dain Shin
+ * Student Number: 200535561
+ * Last Modified: August 11st, 2024
+ * Version: 1.0
+ * Description: This is a To do List application with which user can manage and organise schedule
+ */
 class TaskViewModel : ViewModel() {
     private val dataManager = DataManager.instance()
 
@@ -27,8 +36,6 @@ class TaskViewModel : ViewModel() {
         tasksListener = firestore.collection("tasks")
             .addSnapshotListener { snapshot, e ->
 
-                Log.w("e의값", e)
-
                 if (e != null) {
                     Log.w("TaskViewModel", "Listen failed.", e)
                     return@addSnapshotListener
@@ -44,14 +51,14 @@ class TaskViewModel : ViewModel() {
             }
     }
 
-    // Function to load a specific TVShow by ID from the DataManager
+    // details
     fun loadTaskById(id: String) {
         viewModelScope.launch {
             m_task.value = dataManager.getTaskById(id)
         }
     }
 
-    // Function to save or update a TVShow in the DataManager
+    // save
     fun saveTask(task: Task) {
         viewModelScope.launch {
             if (task.id.isEmpty()) {
@@ -63,7 +70,7 @@ class TaskViewModel : ViewModel() {
         }
     }
 
-    // Function to delete a TVShow from the DataManager
+    // delete
     fun deleteTask(task: Task) {
         viewModelScope.launch {
             dataManager.delete(task)
@@ -71,6 +78,7 @@ class TaskViewModel : ViewModel() {
         }
     }
 
+    // update
     fun updateTask(task: Task) {
         viewModelScope.launch {
             val taskDocumentRef = firestore.collection("tasks").document(task.id)

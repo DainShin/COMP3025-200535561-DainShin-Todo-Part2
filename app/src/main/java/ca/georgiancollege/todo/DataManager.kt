@@ -6,6 +6,16 @@ import com.google.firebase.ktx.Firebase
 import android.util.Log
 import kotlinx.coroutines.tasks.await
 
+/**
+ * Program Name: COMP3025 – Mobile and Pervasive Computing
+ * File Name: DataManager
+ * File Description: This is a singleton class that manages CRUD operations for Task objects in Firebase Firestore using Kotlin coroutines for asynchronous tasks.
+ * Student Name: Dain Shin
+ * Student Number: 200535561
+ * Last Modified: August 11st, 2024
+ * Version: 1.0
+ * App Description: This is a To do List application with which user can manage and organise schedule
+ */
 class DataManager private constructor()
 {
     private val db: FirebaseFirestore = Firebase.firestore

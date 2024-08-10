@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore
  * File Description:  This class manages a RecyclerView displaying a list of tasks and a button for adding new tasks, and navigates to a details screen when a task item is clicked.
  * Student Name: Dain Shin
  * Student Number: 200535561
- * Last Modified: July 21st, 2024
+ * Last Modified: August 11st, 2024
  * Version: 1.0
  * Description: This is a To do List application with which user can manage and organise schedule
  */
@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         },
         onItemCheckedChanged = { task: Task ->
-            viewModel.updateTask(task) // ViewModel의 updateTask 메소드 호출
+            viewModel.updateTask(task) // call ViewModel's updateTask fucntion
         }
     )
 
