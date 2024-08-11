@@ -33,6 +33,7 @@ class DetailsActivity: AppCompatActivity()
     private lateinit var dataManager: DataManager
     private var taskId: String? = null
     private val today = Calendar.getInstance()
+    private var selectedDate: Date? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,8 +55,8 @@ class DetailsActivity: AppCompatActivity()
 
         // date
         val calendar: Calendar = Calendar.getInstance()
-        var selectedDate: Date? = null
         val dateFormat = SimpleDateFormat("MMM d, yyyy", Locale.getDefault())
+
         binding.calendarView.setOnDateChangeListener { _, year, month, dayOfMonth ->
             calendar.set(year, month, dayOfMonth)
             selectedDate = calendar.time
@@ -78,6 +79,7 @@ class DetailsActivity: AppCompatActivity()
             task?.let {
                 binding.editTaskTitle.setText(it.name)
                 binding.editDetails.setText(it.notes)
+                selectedDate = it.dueDate
                 binding.detailsDueDate.text = it.dueDate?.let { date -> dateFormat.format(date) } ?: ""
 
                 // If the due date is before today -> warning message
@@ -118,7 +120,8 @@ class DetailsActivity: AppCompatActivity()
         }
 
         binding.saveButton.setOnClickListener {
-            saveTask(selectedDate)
+            //saveTask(selectedDate)
+            saveConfirm(selectedDate)
         }
 
         binding.deleteButton.setOnClickListener {
@@ -141,6 +144,17 @@ class DetailsActivity: AppCompatActivity()
                 binding.calendarView.visibility = View.GONE
             }
         }
+    }
+
+    private fun saveConfirm(selectedDate: Date?) {
+        AlertDialog.Builder(this)
+            .setTitle("Save Task")
+            .setMessage("Do you want to save this task?")
+            .setPositiveButton("Yes") { _, _ ->
+                saveTask(selectedDate)
+            }
+            .setNegativeButton("No", null)
+            .show()
     }
 
     private fun saveTask(selectedDate: Date?) {
