@@ -22,13 +22,12 @@ import com.google.firebase.firestore.FirebaseFirestore
  * Version: 1.0
  * Description: This is a To do List application with which user can manage and organise schedule
  */
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity()
+{
     private lateinit var binding: ActivityMainBinding
     private val viewModel: TaskViewModel by viewModels()
 
     private lateinit var dataManager: DataManager
-
 
     // Adapter for the RecyclerView, with a click listener to open the DetailsActivity
     private val adapter = TaskListAdapter(
@@ -39,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         },
         onItemCheckedChanged = { task: Task ->
-            viewModel.updateTask(task) // call ViewModel's updateTask fucntion
+            viewModel.updateTask(task) // call ViewModel's updateTask function
         }
     )
 

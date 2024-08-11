@@ -15,14 +15,16 @@ import ca.georgiancollege.todo.databinding.TextRowItemBinding
  * Version: 1.0
  * Description: This is a To do List application with which user can manage and organise schedule
  */
-class TaskListAdapter(private val onItemClicked: (Task) -> Unit, private val onItemCheckedChanged: (Task) -> Unit) : ListAdapter<Task, TaskViewHolder>(TaskComparator()) {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
+class TaskListAdapter(private val onItemClicked: (Task) -> Unit, private val onItemCheckedChanged: (Task) -> Unit) : ListAdapter<Task, TaskViewHolder>(TaskComparator())
+{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder
+    {
         val binding = TextRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TaskViewHolder(binding, onItemCheckedChanged)
     }
 
-    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TaskViewHolder, position: Int)
+    {
         val current = getItem(position)
         holder.bind(current)
         holder.itemView.setOnClickListener {

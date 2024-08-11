@@ -129,11 +129,10 @@ class DetailsActivity: AppCompatActivity()
             finish()
         }
 
-        // Calendar
-        // hide calendarView by default
+        // Calendar: hide calendarView by default
         binding.calendarView.visibility = View.GONE
 
-        // click event
+        // Click event
         binding.dueDateSection.setOnClickListener {
             // Toggle visibility of CalendarView
             if (binding.calendarView.visibility == View.GONE) {

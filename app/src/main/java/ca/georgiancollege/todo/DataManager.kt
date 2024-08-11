@@ -38,7 +38,7 @@ class DataManager private constructor()
         }
     }
 
-    // create
+    // Create task
     suspend fun insert(task: Task) {
         try {
             db.collection("tasks").document(task.id).set(task).await()
@@ -48,7 +48,7 @@ class DataManager private constructor()
         }
     }
 
-    // update
+    // Update task
     suspend fun update(task: Task) {
         try {
             db.collection("tasks").document(task.id).set(task).await()
@@ -58,7 +58,7 @@ class DataManager private constructor()
         }
     }
 
-    // delete
+    // Delete task
     suspend fun delete(task: Task) {
         try {
             db.collection("tasks").document(task.id).delete().await()
@@ -68,7 +68,7 @@ class DataManager private constructor()
         }
     }
 
-    // get all Tasks
+    // Get all Tasks
     suspend fun getAllTasks(): List<Task> {
         return try {
             val result = db.collection("tasks").get().await()
@@ -79,7 +79,7 @@ class DataManager private constructor()
         }
     }
 
-    // get a Task by ID
+    // Get a Task by ID
     suspend fun getTaskById(id: String) : Task? {
         return try {
             val result = db.collection("tasks").document(id).get().await()

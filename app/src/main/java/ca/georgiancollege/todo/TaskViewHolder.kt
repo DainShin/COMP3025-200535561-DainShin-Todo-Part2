@@ -31,6 +31,8 @@ class TaskViewHolder(private val binding: TextRowItemBinding, private val onItem
         binding.dueDate.text = task.dueDate?.let { dateFormat.format(it) } ?: ""
         binding.checkBox.isChecked = task.isCompleted
 
+        binding.warningText.visibility = View.INVISIBLE
+
         if (task.dueDate?.before(today.time) == true && !binding.checkBox.isChecked) {
             binding.warningText.visibility = View.VISIBLE
         } else {
