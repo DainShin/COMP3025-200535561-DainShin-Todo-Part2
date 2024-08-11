@@ -80,8 +80,10 @@ class TaskViewModel : ViewModel() {
         viewModelScope.launch {
             if (task.id.isEmpty()) {
                 dataManager.insert(task)
+                Log.d("TaskViewModel", "${task.name} is created")
             } else {
-                dataManager.update(task)
+              dataManager.update(task)
+                Log.d("TaskViewModel", "${task.name} is updated")
             }
             loadAllTasks()
         }
@@ -106,16 +108,17 @@ class TaskViewModel : ViewModel() {
      */
     fun updateTask(task: Task) {
         viewModelScope.launch {
-            val existingTask = dataManager.getTaskById(task.id)
-            if (existingTask != null) {
-                val updatedTask = existingTask.copy(isCompleted = task.isCompleted)
-                firestore.collection("tasks").document(task.id).set(updatedTask)
+            try {
+                // Update only the changed fields of the task
+                firestore.collection("tasks").document(task.id).update("isCompleted", task.isCompleted)
                     .addOnSuccessListener {
-                        Log.d("TaskViewModel", "Task successfully updated!")
+                        Log.d("TaskViewModel", "${task.id}, ${task.name}, ${task.isCompleted} Task successfully updated!")
                     }
                     .addOnFailureListener { e ->
                         Log.w("TaskViewModel", "Error updating task", e)
                     }
+            } catch (e: Exception) {
+                Log.e("TaskViewModel", "Error updating task", e)
             }
         }
     }
