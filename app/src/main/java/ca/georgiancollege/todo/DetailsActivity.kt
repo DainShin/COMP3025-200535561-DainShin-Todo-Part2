@@ -148,29 +148,34 @@ class DetailsActivity: AppCompatActivity()
         val name = binding.editTaskTitle.text.toString()
         val notes = binding.editDetails.text.toString()
 
-        val hasDueDate = selectedDate != null
-        val dueDate = if (hasDueDate) {
-            selectedDate
-        } else {
-            Date()  // Set dueDate to current date if hasDueDate is false
-        }
+        if (name.isNotEmpty()) {
+            // taskId가 존재하면 기존 task를 비동기적으로 가져옴
+            taskId?.let {
+                viewModel.loadTaskById(it)
+            }
 
-        val isCompleted = binding.checkbox.isChecked
+            viewModel.task.observe(this) { existingTask ->
+                val dueDate = when {
+                    selectedDate != null -> selectedDate
+                    existingTask?.dueDate != null -> existingTask.dueDate
+                    else -> Date()
+                }
 
-        if (name.isNotEmpty())
-        {
-            val task = Task(
-                id = taskId ?: UUID.randomUUID().toString(),
-                name = name,
-                notes = notes,
-                dueDate = dueDate,
-                hasDueDate = true,
-                isCompleted = isCompleted
-            )
+                val isCompleted = binding.checkbox.isChecked
 
-            viewModel.saveTask(task)
-            Toast.makeText(this,"Task Saved",  Toast.LENGTH_SHORT).show()
-            finish()
+                val task = Task(
+                    id = taskId ?: UUID.randomUUID().toString(),
+                    name = name,
+                    notes = notes,
+                    dueDate = dueDate,
+                    hasDueDate = true,
+                    isCompleted = isCompleted
+                )
+
+                viewModel.saveTask(task)
+                Toast.makeText(this, "Task Saved", Toast.LENGTH_SHORT).show()
+                finish()
+            }
         }
     }
 
