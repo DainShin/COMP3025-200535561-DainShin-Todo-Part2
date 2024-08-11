@@ -32,6 +32,11 @@ class TaskViewHolder(private val binding: TextRowItemBinding, private val onItem
         set(Calendar.MILLISECOND, 0)
     }
 
+    /**
+     * Binds the given Task object to the views in the ViewHolder.
+     *
+     * @param task The Task object to bind to the views.
+     */
     fun bind(task: Task) {
         binding.checkBox.text = task.name
         val dateFormat = SimpleDateFormat("MMM d, yyyy", Locale.getDefault())
@@ -53,6 +58,12 @@ class TaskViewHolder(private val binding: TextRowItemBinding, private val onItem
         }
     }
 
+    /**
+     * Applies or removes strikethrough text style based on the checkbox's checked state.
+     *
+     * @param checkBox The CheckBox to apply the strikethrough style to.
+     * @param isChecked The checked state of the CheckBox.
+     */
     private fun applyStrikethrough(checkBox: CheckBox, isChecked: Boolean) {
         if (isChecked) {
             checkBox.paintFlags = checkBox.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
@@ -61,6 +72,11 @@ class TaskViewHolder(private val binding: TextRowItemBinding, private val onItem
         }
     }
 
+    /**
+     * Updates the visibility and color of the overdue warning text based on the task's due date and completion status.
+     *
+     * @param task The Task object to check for overdue status.
+     */
     private fun updateOverdue(task: Task) {
         if (task.dueDate?.before(today.time) == true && !task.isCompleted) {
             binding.warningText.visibility = View.VISIBLE

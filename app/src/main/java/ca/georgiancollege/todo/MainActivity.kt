@@ -42,6 +42,11 @@ class MainActivity : AppCompatActivity()
         }
     )
 
+    /**
+     * Called when the activity is first created.
+     *
+     * @param savedInstanceState The saved state of the activity, if any.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -71,6 +76,10 @@ class MainActivity : AppCompatActivity()
         }
     }
 
+    /**
+     * Called when the activity is resumed and reloads s all tasks when the activity comes back to the foreground
+     *
+     */
     override fun onResume()
     {
         super.onResume()

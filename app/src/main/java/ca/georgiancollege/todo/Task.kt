@@ -14,7 +14,6 @@ import java.util.Date
  * Version: 1.0
  * Description: This is a To do List application with which user can manage and organise schedule
  */
-
 @IgnoreExtraProperties
 data class Task(
     @DocumentId val id: String = "",

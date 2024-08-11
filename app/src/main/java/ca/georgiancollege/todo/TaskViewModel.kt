@@ -32,6 +32,10 @@ class TaskViewModel : ViewModel() {
     private val _taskCount = MutableLiveData<Int>()
     val taskCount: LiveData<Int> get() = _taskCount
 
+    /**
+     * Loads all tasks from Firestore and updates LiveData objects.
+     * Sets up a snapshot listener to observe changes in the tasks collection.
+     */
     fun loadAllTasks() {
         // Remove the previous listener if it exists
         tasksListener?.remove()
@@ -56,14 +60,22 @@ class TaskViewModel : ViewModel() {
             }
     }
 
-    // details
+    /**
+     * Loads a specific task by its ID and updates the LiveData object.
+     *
+     * @param id The ID of the task to load.
+     */
     fun loadTaskById(id: String) {
         viewModelScope.launch {
             m_task.value = dataManager.getTaskById(id)
         }
     }
 
-    // save
+    /**
+     * Saves or updates a task to Firestore.
+     *
+     * @param task The task to save.
+     */
     fun saveTask(task: Task) {
         viewModelScope.launch {
             if (task.id.isEmpty()) {
@@ -75,7 +87,11 @@ class TaskViewModel : ViewModel() {
         }
     }
 
-    // delete
+    /**
+     * Deletes a task from Firestore and reloads all tasks.
+     *
+     * @param task The task to delete.
+     */
     fun deleteTask(task: Task) {
         viewModelScope.launch {
             dataManager.delete(task)
@@ -83,7 +99,11 @@ class TaskViewModel : ViewModel() {
         }
     }
 
-    // update
+    /**
+     * Updates the completion status of a specific task in Firestore.
+     *
+     * @param task The task with updated completion status.
+     */
     fun updateTask(task: Task) {
         viewModelScope.launch {
             val existingTask = dataManager.getTaskById(task.id)

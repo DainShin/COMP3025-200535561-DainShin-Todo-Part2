@@ -25,11 +25,9 @@ import java.util.UUID
  * Version: 1.0
  * App Description: This is a To do List application with which user can manage and organise schedule
  */
-class DetailsActivity: AppCompatActivity()
-{
+class DetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailsBinding
     private val viewModel: TaskViewModel by viewModels()
-
     private lateinit var dataManager: DataManager
     private var taskId: String? = null
     private val today = Calendar.getInstance()
@@ -44,12 +42,9 @@ class DetailsActivity: AppCompatActivity()
 
         taskId = intent.getStringExtra("taskId")
 
-        if(taskId != null)
-        {
+        if (taskId != null) {
             viewModel.loadTaskById(taskId!!)
-        }
-        else
-        {
+        } else {
             binding.deleteButton.visibility = View.GONE
         }
 
@@ -80,13 +75,15 @@ class DetailsActivity: AppCompatActivity()
                 binding.editTaskTitle.setText(it.name)
                 binding.editDetails.setText(it.notes)
                 selectedDate = it.dueDate
-                binding.detailsDueDate.text = it.dueDate?.let { date -> dateFormat.format(date) } ?: ""
+                binding.detailsDueDate.text =
+                    it.dueDate?.let { date -> dateFormat.format(date) } ?: ""
 
                 // If the due date is before today -> warning message
                 if (it.dueDate != null) {
                     val dueDateCalendar = Calendar.getInstance().apply { time = it.dueDate }
                     if (dueDateCalendar.get(Calendar.YEAR) == today.get(Calendar.YEAR) &&
-                        dueDateCalendar.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)) {
+                        dueDateCalendar.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)
+                    ) {
                         binding.detailsWarning.visibility = View.GONE
                     } else if (it.dueDate.before(today.time) && !it.isCompleted) {
                         binding.detailsWarning.visibility = View.VISIBLE
@@ -101,20 +98,24 @@ class DetailsActivity: AppCompatActivity()
                 // isFinished
                 binding.checkbox.isChecked = it.isCompleted
                 if (it.isCompleted) {
-                    binding.editTaskTitle.paintFlags = binding.editTaskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    binding.editTaskTitle.paintFlags =
+                        binding.editTaskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 } else {
-                    binding.editTaskTitle.paintFlags = binding.editTaskTitle.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                    binding.editTaskTitle.paintFlags =
+                        binding.editTaskTitle.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 }
             }
         }
 
         // checkbox
-        binding.checkbox.setOnCheckedChangeListener {_, isChecked ->
-            if(isChecked) {
-                binding.editTaskTitle.paintFlags = binding.editTaskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.editTaskTitle.paintFlags =
+                    binding.editTaskTitle.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
                 viewModel.task.value?.isCompleted = true
             } else {
-                binding.editTaskTitle.paintFlags = binding.editTaskTitle.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+                binding.editTaskTitle.paintFlags =
+                    binding.editTaskTitle.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
                 viewModel.task.value?.isCompleted = false
             }
         }
@@ -146,6 +147,11 @@ class DetailsActivity: AppCompatActivity()
         }
     }
 
+    /**
+     * Displays a confirmation dialog to the user asking if they want to save the task.
+     *
+     * @param selectedDate The date associated with the task.
+     */
     private fun saveConfirm(selectedDate: Date?) {
         AlertDialog.Builder(this)
             .setTitle("Save Task")
@@ -157,6 +163,11 @@ class DetailsActivity: AppCompatActivity()
             .show()
     }
 
+    /**
+     * Saves the task with the given details and updates the ViewModel.
+     *
+     * @param selectedDate The date associated with the task. If `null`, the current date is used as the due date.
+     */
     private fun saveTask(selectedDate: Date?) {
         val name = binding.editTaskTitle.text.toString()
         val notes = binding.editDetails.text.toString()
@@ -180,8 +191,10 @@ class DetailsActivity: AppCompatActivity()
         }
     }
 
-    private fun deleteTask()
-    {
+    /**
+     * Shows a confirmation dialog to delete the current task and performs the deletion if confirmed.
+     */
+    private fun deleteTask() {
         taskId?.let { _ ->
             AlertDialog.Builder(this)
                 .setTitle("Delete Task")

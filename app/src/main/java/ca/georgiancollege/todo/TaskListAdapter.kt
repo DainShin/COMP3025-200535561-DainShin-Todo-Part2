@@ -17,12 +17,25 @@ import ca.georgiancollege.todo.databinding.TextRowItemBinding
  */
 class TaskListAdapter(private val onItemClicked: (Task) -> Unit, private val onItemCheckedChanged: (Task) -> Unit) : ListAdapter<Task, TaskViewHolder>(TaskComparator())
 {
+    /**
+     * Creates a new ViewHolder for the RecyclerView with the specified view type.
+     *
+     * @param parent The parent view group that the new ViewHolder will be attached to.
+     * @param viewType The view type of the new ViewHolder.
+     * @return A new TaskViewHolder instance.
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder
     {
         val binding = TextRowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TaskViewHolder(binding, onItemCheckedChanged)
     }
 
+    /**
+     * Binds data to the ViewHolder at the specified position.
+     *
+     * @param holder The ViewHolder to which data should be bound.
+     * @param position The position of the item within the adapter's data set.
+     */
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int)
     {
         val current = getItem(position)

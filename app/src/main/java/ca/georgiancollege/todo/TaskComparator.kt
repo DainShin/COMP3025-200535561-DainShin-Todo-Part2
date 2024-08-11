@@ -15,10 +15,24 @@ import androidx.recyclerview.widget.DiffUtil
  */
 class TaskComparator : DiffUtil.ItemCallback<Task>()
 {
+    /**
+     * Checks if two items represent the same task based on their unique IDs.
+     *
+     * @param oldItem The old Task item.
+     * @param newItem The new Task item.
+     * @return True if the IDs of both items are the same
+     */
     override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
         return oldItem.id == newItem.id
     }
 
+    /**
+     * Checks if the contents of two tasks are the same.
+     *
+     * @param oldItem The old Task item.
+     * @param newItem The new Task item.
+     * @return True if all properties of the old item are the same as the new item
+     */
     override fun areContentsTheSame(oldItem: Task, newItem: Task): Boolean {
         return oldItem == newItem
     }

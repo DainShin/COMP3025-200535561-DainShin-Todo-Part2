@@ -26,6 +26,11 @@ class DataManager private constructor()
         @Volatile
         private var m_instance: DataManager? = null
 
+        /**
+         * This ensures that only one instance of DataManager is created using double-checked locking.
+         *
+         * @return The singleton instance of DataManager.
+         */
         fun instance(): DataManager {
             if (m_instance == null) {
                 synchronized(this) {
@@ -38,7 +43,11 @@ class DataManager private constructor()
         }
     }
 
-    // Create task
+    /**
+     * Inserts a new task into the Firestore database.
+     *
+     * @param task The Task object to be inserted into the database.
+     */
     suspend fun insert(task: Task) {
         try {
             db.collection("tasks").document(task.id).set(task).await()
@@ -48,7 +57,11 @@ class DataManager private constructor()
         }
     }
 
-    // Update task
+    /**
+     * Updates an existing task in the database.
+     *
+     * @param task The Task object with updated values to be saved in the database.
+     */
     suspend fun update(task: Task) {
         try {
             db.collection("tasks").document(task.id).set(task).await()
@@ -58,7 +71,11 @@ class DataManager private constructor()
         }
     }
 
-    // Delete task
+    /**
+     * Deletes a task.
+     *
+     * @param task The Task object to be deleted from the database.
+     */
     suspend fun delete(task: Task) {
         try {
             db.collection("tasks").document(task.id).delete().await()
@@ -68,7 +85,11 @@ class DataManager private constructor()
         }
     }
 
-    // Get all Tasks
+    /**
+     * Gets all tasks.
+     *
+     * @return A list of Task objects retrieved from the database.
+     */
     suspend fun getAllTasks(): List<Task> {
         return try {
             val result = db.collection("tasks").get().await()
@@ -79,7 +100,12 @@ class DataManager private constructor()
         }
     }
 
-    // Get a Task by ID
+    /**
+     * Retrieves a task by its ID.
+     *
+     * @param id The ID of the Task to retrieve.
+     * @return The Task object with the specified ID, or null if not found.
+     */
     suspend fun getTaskById(id: String) : Task? {
         return try {
             val result = db.collection("tasks").document(id).get().await()
