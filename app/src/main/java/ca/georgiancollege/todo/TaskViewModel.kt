@@ -29,6 +29,9 @@ class TaskViewModel : ViewModel() {
     private val firestore = FirebaseFirestore.getInstance()
     private var tasksListener: ListenerRegistration? = null
 
+    private val _taskCount = MutableLiveData<Int>()
+    val taskCount: LiveData<Int> get() = _taskCount
+
     fun loadAllTasks() {
         // Remove the previous listener if it exists
         tasksListener?.remove()
@@ -44,9 +47,11 @@ class TaskViewModel : ViewModel() {
                 if (snapshot != null && !snapshot.isEmpty) {
                     val taskList = snapshot.toObjects(Task::class.java)
                     m_tasks.postValue(taskList)
+                    _taskCount.postValue(taskList.size)
                 } else {
                     Log.d("TaskViewModel", "Current data: null")
                     m_tasks.postValue(emptyList())
+                    _taskCount.postValue(0)
                 }
             }
     }

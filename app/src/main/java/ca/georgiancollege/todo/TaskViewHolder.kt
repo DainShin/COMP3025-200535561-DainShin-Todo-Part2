@@ -23,7 +23,12 @@ import java.util.Locale
  */
 class TaskViewHolder(private val binding: TextRowItemBinding, private val onItemCheckedChanged: (Task) -> Unit) : RecyclerView.ViewHolder(binding.root) {
 
-    private val today = Calendar.getInstance()
+    private val today: Calendar = Calendar.getInstance().apply {
+        set(Calendar.HOUR_OF_DAY, 0)
+        set(Calendar.MINUTE, 0)
+        set(Calendar.SECOND, 0)
+        set(Calendar.MILLISECOND, 0)
+    }
 
     fun bind(task: Task) {
         binding.checkBox.text = task.name

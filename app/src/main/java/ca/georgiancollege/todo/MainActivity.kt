@@ -59,6 +59,10 @@ class MainActivity : AppCompatActivity()
             adapter.submitList(tasks)
         }
 
+        viewModel.taskCount.observe(this) { count ->
+            binding.totalTask.text = "$count task(s)"
+        }
+
         viewModel.loadAllTasks()
 
         binding.addButton.setOnClickListener {

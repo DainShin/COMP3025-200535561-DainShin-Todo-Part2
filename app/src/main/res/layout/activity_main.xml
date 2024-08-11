@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/background_mx"
-            android:text="3 tasks"
+            android:text="0 tasks"
             android:textColor="@color/text_colour"
             android:textSize="@dimen/small_text_size" />
 
