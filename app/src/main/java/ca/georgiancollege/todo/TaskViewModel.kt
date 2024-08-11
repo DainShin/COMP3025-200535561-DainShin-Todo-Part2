@@ -86,15 +86,17 @@ class TaskViewModel : ViewModel() {
     // update
     fun updateTask(task: Task) {
         viewModelScope.launch {
-            val taskDocumentRef = firestore.collection("tasks").document(task.id)
-            taskDocumentRef.set(task)
-                .addOnSuccessListener {
-                    Log.d("TaskViewModel", "Task successfully updated!")
-                }
-                .addOnFailureListener { e ->
-                    Log.w("TaskViewModel", "Error updating task", e)
-                }
-            loadAllTasks()
+            val existingTask = dataManager.getTaskById(task.id)
+            if (existingTask != null) {
+                val updatedTask = existingTask.copy(isCompleted = task.isCompleted)
+                firestore.collection("tasks").document(task.id).set(updatedTask)
+                    .addOnSuccessListener {
+                        Log.d("TaskViewModel", "Task successfully updated!")
+                    }
+                    .addOnFailureListener { e ->
+                        Log.w("TaskViewModel", "Error updating task", e)
+                    }
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 package ca.georgiancollege.todo
 
 import android.graphics.Paint
+import android.util.Log
 import android.view.View
 import android.widget.CheckBox
 import androidx.activity.viewModels
@@ -37,26 +38,19 @@ class TaskViewHolder(private val binding: TextRowItemBinding, private val onItem
         binding.dueDate.text = task.dueDate?.let { dateFormat.format(it) } ?: ""
         binding.checkBox.isChecked = task.isCompleted
 
-        binding.warningText.visibility = View.INVISIBLE
-
-        if (task.dueDate?.before(today.time) == true && !binding.checkBox.isChecked) {
-            binding.warningText.visibility = View.VISIBLE
-            binding.dueDate.setTextColor(ContextCompat.getColor(binding.root.context, R.color.red))
-        } else {
-            binding.warningText.visibility = View.INVISIBLE
-            binding.dueDate.setTextColor(ContextCompat.getColor(binding.root.context, R.color.black))
-        }
+        updateOverdue(task)
+        Log.i("듀데이트", task.dueDate.toString())
 
         binding.checkBox.setOnCheckedChangeListener(null)
 
         applyStrikethrough(binding.checkBox, task.isCompleted)
 
         binding.checkBox.setOnCheckedChangeListener { _, isChecked ->
-            task.isCompleted = isChecked
+            val updatedTask = task.copy(isCompleted = isChecked)
             applyStrikethrough(binding.checkBox, isChecked)
-            onItemCheckedChanged(task)
+            updateOverdue(updatedTask)
+            onItemCheckedChanged(updatedTask)
         }
-
     }
 
     private fun applyStrikethrough(checkBox: CheckBox, isChecked: Boolean) {
@@ -64,6 +58,16 @@ class TaskViewHolder(private val binding: TextRowItemBinding, private val onItem
             checkBox.paintFlags = checkBox.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         } else {
             checkBox.paintFlags = checkBox.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+        }
+    }
+
+    private fun updateOverdue(task: Task) {
+        if (task.dueDate?.before(today.time) == true && !task.isCompleted) {
+            binding.warningText.visibility = View.VISIBLE
+            binding.dueDate.setTextColor(ContextCompat.getColor(binding.root.context, R.color.red))
+        } else {
+            binding.warningText.visibility = View.INVISIBLE
+            binding.dueDate.setTextColor(ContextCompat.getColor(binding.root.context, R.color.black))
         }
     }
 }
