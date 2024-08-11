@@ -4,6 +4,7 @@ import android.graphics.Paint
 import android.view.View
 import android.widget.CheckBox
 import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import ca.georgiancollege.todo.databinding.TextRowItemBinding
 import java.text.SimpleDateFormat
@@ -40,8 +41,10 @@ class TaskViewHolder(private val binding: TextRowItemBinding, private val onItem
 
         if (task.dueDate?.before(today.time) == true && !binding.checkBox.isChecked) {
             binding.warningText.visibility = View.VISIBLE
+            binding.dueDate.setTextColor(ContextCompat.getColor(binding.root.context, R.color.red))
         } else {
             binding.warningText.visibility = View.INVISIBLE
+            binding.dueDate.setTextColor(ContextCompat.getColor(binding.root.context, R.color.black))
         }
 
         binding.checkBox.setOnCheckedChangeListener(null)
