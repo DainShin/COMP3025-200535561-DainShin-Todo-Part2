@@ -5,8 +5,8 @@ Task status is updated in real time, and users can intuitively mark tasks as com
 
 
 1) Wire Frame
-<img width="663" alt="image" src="https://github.com/user-attachments/assets/26f58c04-e632-4bac-a5ce-fd29548ae2ee" />
-<img width="626" alt="image" src="https://github.com/user-attachments/assets/ce93187d-cc36-4a7a-b728-511101fcfaad" />
+<img width="623" alt="image" src="https://github.com/user-attachments/assets/26f58c04-e632-4bac-a5ce-fd29548ae2ee" />
+<img width="623" alt="image" src="https://github.com/user-attachments/assets/ce93187d-cc36-4a7a-b728-511101fcfaad" />
 
 2) Colour Set
 <img width="623" alt="image" src="https://github.com/user-attachments/assets/a2670078-9b45-4c08-9c3c-dbb9073900b3" />
